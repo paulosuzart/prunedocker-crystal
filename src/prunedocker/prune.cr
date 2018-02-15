@@ -2,14 +2,17 @@ require "habitat"
 require "http/client"
 require "json"
 
-BASE_URL = "https://hub.docker.com/v2"
-
+BASE_URL   = "https://hub.docker.com/v2"
+LOGIN_PATH = "/users/login/"
 
 class InvalidCredentials < Exception
 end
 
+class UnknownResponse < Exception
+end
+
 class Prune
-  @@token : String | Nil
+  @@token : String?
 
   Habitat.create do
     setting password : String
@@ -26,8 +29,7 @@ class Prune
 
   @@client.before_request do |request|
     puts request.path
-    puts request
-    if request.path != "/users/login"
+    if request.path != LOGIN_PATH
       @@token ||= authenticate
       request.headers["Authorization"] = "JWT #{@@token}"
     end
@@ -41,17 +43,17 @@ class Prune
         json.field "password", settings.password
       end
     end
-    puts payload
-    @@client.post "/users/login", body: payload do |response|
-      raise InvalidCredentials.new if response.status_code == 301
 
-      JSON.parse(response.body)["token"].as_s
+    @@client.post LOGIN_PATH, body: payload do |response|
+      puts response.body_io.gets_to_end
+      raise InvalidCredentials.new if response.status_code != 200
+      JSON.parse(response.body_io)["token"].as_s
     end
   end
 
   private def tags
     @@client.get "/repositories/#{settings.user}/#{settings.repository}/tags/" do |response|
-      puts response.body
+      puts response.body_io.gets_to_end
     end
   end
 
@@ -59,5 +61,7 @@ class Prune
     tags
   rescue InvalidCredentials
     puts "Unable to login with the provided credentials"
+  rescue UnknownResponse
+    puts "Server returned a response that can't be handled"
   end
 end
