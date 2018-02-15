@@ -1,0 +1,20 @@
+name: prunedocker.cr
+version: 0.1.0
+
+authors:
+  - Paulo Suzart <paulosuzart@roundpe.gs>
+
+targets:
+  prunedocker:
+    main: src/prunedocker.cr
+
+crystal: 0.24.1
+
+license: MIT
+
+dependencies:
+  cli:
+    github: paulosuzart/cli
+    branch: bump-crystal
+  habitat:
+    github: luckyframework/habitat

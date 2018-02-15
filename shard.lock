@@ -1,0 +1,22 @@
+version: 1.0
+shards:
+  callback:
+    github: mosop/callback
+    version: 0.6.3
+
+  cli:
+    github: paulosuzart/cli
+    commit: da5597a822ad7db99f62c58981c93071483741d7
+
+  habitat:
+    github: luckyframework/habitat
+    version: 0.2.1
+
+  optarg:
+    github: mosop/optarg
+    version: 0.5.8
+
+  string_inflection:
+    github: mosop/string_inflection
+    version: 0.2.1
+
