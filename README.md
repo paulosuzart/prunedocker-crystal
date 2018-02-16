@@ -1,4 +1,4 @@
-# prunedocker.cr
+# prunedocker-crystal
 
 TODO: Write a description here
 
@@ -30,7 +30,7 @@ Options:
 
 This is a simple port from a racket project produced for a blog post. Not sure if need any contribuition, but just in case:
 
-1. Fork it ( https://github.com/[your-github-name]/prunedocker.cr/fork )
+1. Fork it ( https://github.com/[your-github-name]/prunedocker-crystal/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
