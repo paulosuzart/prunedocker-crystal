@@ -23,12 +23,12 @@ class Prune
   end
 
   def initialize
+    puts "**RUNNING IN DRY RUN MODE - NOT TAGS WILL BE DELETED**" if settings.dry
   end
 
   @@client = HTTP::Client.new URI.parse(BASE_URL)
 
   @@client.before_request do |request|
-    puts request.path
     if request.path != LOGIN_PATH
       @@token ||= authenticate
       request.headers["Authorization"] = "JWT #{@@token}"
