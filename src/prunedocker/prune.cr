@@ -77,16 +77,16 @@ class Prune
       tags += result.map &.["name"].as_s
     end
 
-    puts "Existings tags are #{tags.join(',')}"
+    puts "Existings tags are #{tags.join(' ')}"
 
     delete_from = tags.size - (tags.size - settings.keep)
     tags_to_delete = tags.delete_at(delete_from..tags.size)
     delete tags_to_delete unless settings.dry
 
-    puts "This is a dry run. Would delete the tags #{tags_to_delete}" if settings.dry
-    puts "The following tags were deleted #{tags_to_delete}" unless settings.dry
+    puts "This is a dry run. Would delete the tags #{tags_to_delete.join(' ')}" if settings.dry
+    puts "The following tags were deleted #{tags_to_delete.join(' ')}" unless settings.dry
   rescue IndexError
-    puts "No tas to delete"
+    puts "No tags to delete"
   rescue InvalidCredentials
     puts "Unable to login with the provided credentials"
   rescue UnknownResponse
