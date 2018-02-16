@@ -4,17 +4,31 @@ TODO: Write a description here
 
 ## Installation
 
-TODO: Write installation instructions here
+Just clone the repo then `shards update`.
 
 ## Usage
 
-TODO: Write usage instructions here
+Build it with `shards build prunedocker --error-trace` and you get your binary under `bin` folder. Then run it:
 
-## Development
+`./bin/prunedocker -u someUser -p somepass -r some_repo -k 12 --dry-run`
 
-TODO: Write development instructions here
+Use the `-h` options to see the help menu like this one:
+
+```
+prunedocker OPTIONS
+
+Options:
+  --dry-run       Just lists tags that will be dropped without actually dropping them
+  -k, --keep      Keeps k tags in the repo. Will delete the remaining older tags
+  -p, --password  Dockerhub password
+  -r, --repo      Dockerhub repository
+  -u, --user      Dockerhub Login
+  -h, --help      show this help
+```
 
 ## Contributing
+
+This is a simple port from a racket project produced for a blog post. Not sure if need any contribuition, but just in case:
 
 1. Fork it ( https://github.com/[your-github-name]/prunedocker.cr/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
