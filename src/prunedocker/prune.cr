@@ -29,10 +29,7 @@ class Prune
   @@client = HTTP::Client.new URI.parse(BASE_URL)
 
   @@client.before_request do |request|
-    if request.path != LOGIN_PATH
-      @@token ||= authenticate
-      request.headers["Authorization"] = "JWT #{@@token}"
-    end
+    request.headers["Authorization"] = "JWT #{@@token ||= authenticate}" unless request.path == LOGIN_PATH
     request.headers["Content-Type"] = "application/json"
   end
 
