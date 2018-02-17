@@ -1,6 +1,6 @@
 # prunedocker-crystal
 
-TODO: Write a description here
+This project supports the blog post [Why Crystal is Awesome](http://paulosuzart.github.io/blog/2018/02/15/why-crystal-is-awesome/)
 
 ## Installation
 
